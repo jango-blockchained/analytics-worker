@@ -1,0 +1,39 @@
+{
+  "name": "analytics-worker",
+  "account_id": "YOUR_ACCOUNT_ID",
+  "main": "src/index.ts",
+  "alias": {
+    "@hoox-sh/hoox-shared/errors": "../../packages/shared/src/errors.ts",
+    "@hoox-sh/hoox-shared/middleware": "../../packages/shared/src/middleware/index.ts",
+    "@hoox-sh/hoox-shared/router": "../../packages/shared/src/router.ts",
+    "@hoox-sh/hoox-shared/health": "../../packages/shared/src/health.ts"
+  },
+  "compatibility_date": "2026-06-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "placement": {
+    "mode": "smart"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1,
+    "logs": { "enabled": true, "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 }
+  },
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS_ENGINE",
+      "dataset": "hoox-analytics"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "CONFIG_KV",
+      "id": "YOUR_CONFIG_KV_ID",
+      "preview_id": "YOUR_CONFIG_KV_PREVIEW_ID"
+    }
+  ],
+  // CLOUDFLARE_API_TOKEN (Analytics Engine SQL) and INTERNAL_KEY_BINDING
+  // are set via `wrangler secret put` — not declared here.
+  "vars": {},
+  "services": []
+}
